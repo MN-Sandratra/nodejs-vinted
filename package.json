@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-boost": "^0.4.9",
     "apollo-server": "^3.0.1",
     "dotenv": "^10.0.0",
     "graphql": "^15.5.1",
