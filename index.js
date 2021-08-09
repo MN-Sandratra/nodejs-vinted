@@ -6,16 +6,11 @@ const resolvers=require('./graphql/resolvers/index');
 const mongoose = require('mongoose');
 
 require('dotenv/config')
-const ApolloClient =require ('apollo-boost');
-
-const client = new ApolloClient({
-  uri: "http://localhost:4200",
-  fetchOptions: {
-    mode: 'no-cors',
-  },
-});
 
 const server=new ApolloServer.ApolloServer({
+    cors: {
+		origin: 'http://localhost:4200',			// <- allow request from all domains
+		credentials: true},
     typeDefs,
     resolvers
 });
