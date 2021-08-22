@@ -30,7 +30,7 @@ module.exports ={
             if(etat){
                 throw new UserInputError('Username is Taken',{
                     error:{
-                        username:"ce nom d'utiisateur est deja utiise"
+                        username:"cet etat est deja enregistrer"
                     }
                 });
             }
