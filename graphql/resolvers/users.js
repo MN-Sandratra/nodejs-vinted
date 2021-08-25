@@ -41,6 +41,7 @@ module.exports ={
                 createdAt:new Date().toISOString()
             })
             await newUser.save();
+            return newUser
         },
 
         deleteUser:async(parent,args,context,info)=>{

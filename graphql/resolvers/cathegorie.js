@@ -74,7 +74,6 @@ module.exports ={
 
             if(sousCathegorie){
                 const sousCathegorieIndex=Cathegorie.sousCathegorie.findIndex(c=>c.id===sousCathegorieId);
-
                 sousCathegorie.sousCathegorie.splice(sousCathegorieIndex,1);
                 await sousCathegorie.save();
                 return sousCathegorie;

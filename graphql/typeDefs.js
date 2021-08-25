@@ -52,6 +52,15 @@ const typeDefs=gql `
         image:[Image]
     }
 
+    type Message{
+        id:ID
+        sender:ID
+        receiver:ID
+        article:ID
+        message:String
+        createdAt:String
+    }
+
     type Query{
         getAllUsers :[User]
         getAllEtats:[Etat]
@@ -61,6 +70,10 @@ const typeDefs=gql `
         getEtatById(id:ID):Etat
         getArticleById(id:ID):Article
         getCathegorieById(id:ID):Cathegorie
+        getAllMessages:[Message]
+        getAllMyMessages(sender:ID):[Message]
+        getMyMessageAndOther(sender:ID,receiver:ID):[Message]
+        getMyMessageByArticle(sender:ID,article:ID):[Message]
     }
 
     input UserInput{
@@ -105,6 +118,13 @@ const typeDefs=gql `
         color:[ColorInput]
         image:[ImageInput]
     }
+    input MessageInput{
+        sender:ID
+        receiver:ID
+        article:ID
+        message:String
+        createdAt:String
+    }
     
     type Mutation{
         createUser(user:UserInput):User
@@ -121,6 +141,8 @@ const typeDefs=gql `
         createSousCathegorie(cathegorieId:ID,sousCathegorie:sousCathegoriesInput):Cathegorie
         deleteSousCathegorie(cathegorieId:ID,sousCathegorieId:ID):String
         updateSousCathegorie(cathegorieId:ID,sousCathegorieId:ID,sousCathegorie:sousCathegoriesInput):sousCathegorie
+        createMessage(message:MessageInput):Message
+        deleteMessage(id:ID):String
     }
 `
 module.exports=typeDefs;
