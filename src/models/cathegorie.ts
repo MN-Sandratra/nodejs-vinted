@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const cathegorieSchema=new mongoose.Schema({
     designation:String,

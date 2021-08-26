@@ -1,7 +1,12 @@
-const {UserInputError}= require ('apollo-server')
+import {UserInputError} from 'apollo-server';
 const Cathegorie = require('../../models/cathegorie')
 
-module.exports ={
+export interface IsousCath{
+    id:String,
+    designation:String,
+    sousSousCathegorie:[]
+}
+const cathegorieResolvers ={
     Query:{
         getAllCathegories: async ()=>{
             try{
@@ -11,7 +16,7 @@ module.exports ={
                 throw new Error(err);
             }
         },
-        getCathegorieById:async (_parent,{id},_context,_info)=>{
+        getCathegorieById:async (_parent:any,{id}:any,_context:any,_info:any)=>{
             try{
                 return await Cathegorie.findById(id);
             }catch(err){
@@ -21,7 +26,7 @@ module.exports ={
     },
 
     Mutation:{
-        createCathegorie:async(parent,args,context,info)=>{
+        createCathegorie:async(parent:any,args:any,context:any,info:any)=>{
             const{designation,sousCathegorie}=args.cathegorie;
 
             //verify that username doesn't exist
@@ -44,7 +49,7 @@ module.exports ={
                 throw new Error(err);
             } 
         },
-        createSousCathegorie:async(parent,args,context,info)=>{
+        createSousCathegorie:async(parent:any,args:any,context:any,info:any)=>{
             const {cathegorieId}=args;
             const{designation,sousSousCathegorie}=args.sousCathegorie;
 
@@ -67,26 +72,26 @@ module.exports ={
             }else throw new UserInputError("On n'as pas encore cette cathegorie");
             
         },
-        deleteSousCathegorie:async(parent,args,context,info)=>{
+        deleteSousCathegorie:async(parent:any,args:any,context:any,info:any)=>{
             const {cathegorieId}=args;
             const {sousCathegorieId}=args.sousCathegorieId;
             const sousCathegorie=await Cathegorie.findById(cathegorieId);
 
             if(sousCathegorie){
-                const sousCathegorieIndex=Cathegorie.sousCathegorie.findIndex(c=>c.id===sousCathegorieId);
+                const sousCathegorieIndex=Cathegorie.sousCathegorie.findIndex((c:IsousCath)=>c.id===sousCathegorieId);
                 sousCathegorie.sousCathegorie.splice(sousCathegorieIndex,1);
                 await sousCathegorie.save();
                 return sousCathegorie;
             }else throw new UserInputError("On n'as pas encore cette cathegorie");  
         },
 
-        deleteCathegorie:async(parent,args,context,info)=>{
+        deleteCathegorie:async(parent:any,args:any,context:any,info:any)=>{
             const {id}=args;
             await Cathegorie.findByIdAndDelete(id);
             return 'Cathegorie, Delete';
             
         },
-        updateCathegorie:async(parent,args,context,info)=>{
+        updateCathegorie:async(parent:any,args:any,context:any,info:any)=>{
             const {id}=args;
             const {designation,sousCathegorie}=args.cathegorie;
 
@@ -98,14 +103,14 @@ module.exports ={
             return cathegorie;
         },
 
-        updateSousCathegorie:async(parent,args,context,info)=>{
+        updateSousCathegorie:async(parent:any,args:any,context:any,info:any)=>{
             const {cathegorieId}=args;
             const {sousCathegorieId}=args.sousCathegorieId;
             const{designation,sousSousCathegorie}=args.sousCathegorie;
             const sousCathegorie=await Cathegorie.findById(cathegorieId);
 
             if(sousCathegorie){
-                const sousCathegorieIndex=Cathegorie.sousCathegorie.findIndex(c=>c.id===sousCathegorieId);
+                const sousCathegorieIndex=Cathegorie.sousCathegorie.findIndex((c:IsousCath)=>c.id===sousCathegorieId);
 
                 sousCathegorie.sousCathegorie[sousCathegorieIndex].designation=designation;
                 sousCathegorie.sousCathegorie[sousCathegorieIndex].sousSousCathegorie=sousSousCathegorie;
@@ -116,3 +121,5 @@ module.exports ={
         }
     }
 }
+
+export default cathegorieResolvers;

@@ -15,7 +15,11 @@ const server=new ApolloServer.ApolloServer({
     resolvers
 });
 
- async function startServer(){
+process.on('SIGINT', () => { console.log("exiting…"); process.exit(); });
+
+process.on('exit', () => { console.log("exiting…"); process.exit(); });
+
+async function startServer(){
     await mongoose.connect(process.env.CONNECTION_DB,
         {useNewUrlParser:true,
          useUnifiedTopology: true },
@@ -23,7 +27,7 @@ const server=new ApolloServer.ApolloServer({
         .catch(()=>console.log("connection failed"));
     
     server.listen({port:5000}).then(
-        (res)=>{
+        (res:any)=>{
             console.log(`Server running at ${res.url}`);
         }
     )

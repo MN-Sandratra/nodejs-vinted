@@ -1,5 +1,5 @@
-const {UserInputError}= require ('apollo-server')
-const Etat = require('../../models/etat')
+import {UserInputError} from 'apollo-server'
+import Etat from '../../models/etat'
 
 module.exports ={
     Query:{
@@ -12,7 +12,7 @@ module.exports ={
             }
             
         },
-        getEtatById:async (_parent,{id},_context,_info)=>{
+        getEtatById:async (_parent:any,{id}:any,_context:any,_info:any)=>{
             try{
                 return await Etat.findById(id);
             }catch(err){
@@ -22,7 +22,7 @@ module.exports ={
     },
 
     Mutation:{
-        createEtat:async(parent,args,context,info)=>{
+        createEtat:async(parent:any,args:any,context:any,info:any)=>{
             const{designation,description}=args.etat;
 
             //verify that username doesn't exist
@@ -42,14 +42,15 @@ module.exports ={
             await newEtat.save();
             return newEtat;
         },
+        
 
-        deleteEtat:async(parent,args,context,info)=>{
+        deleteEtat:async(parent:any,args:any,context:any,info:any)=>{
             const {id}=args;
             await Etat.findByIdAndDelete(id);
             return 'Etat, Delete';
             
         },
-        updateEtat:async(parent,args,context,info)=>{
+        updateEtat:async(parent:any,args:any,context:any,info:any)=>{
             const {id}=args;
             const {designation,description}=args.etat;
 

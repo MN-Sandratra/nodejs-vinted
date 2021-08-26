@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from'mongoose';
 
 const etatSchema=new mongoose.Schema({
     designation:{
@@ -9,4 +9,4 @@ const etatSchema=new mongoose.Schema({
 });
 
 const Etat=mongoose.model('etat',etatSchema);
-module.exports=Etat;
+export default Etat;

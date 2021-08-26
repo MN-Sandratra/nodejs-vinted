@@ -1,18 +1,18 @@
-const mongoose=require('mongoose');
+import * as mongoose from 'mongoose';
 
-const messageSchema=({
+const messageSchema=new mongoose.Schema({
     sender:{
-        type:mongoose.Schema.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         refs:'User',
         required:true
     },
     receiver:{
-        type:mongoose.Schema.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         refs:'User',
         required:true,
     },
     article:{
-        type:mongoose.Schema.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         refs:'articles',
     },
     message:{

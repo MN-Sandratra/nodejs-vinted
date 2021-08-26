@@ -1,5 +1,6 @@
 const Message=require('../../models/message')
 const ObjectId=require('bson')
+import {UserInputError} from 'apollo-server'
 
 module.exports={
     Query:{
@@ -11,7 +12,7 @@ module.exports={
                 throw new Error(err)
             }
         },
-        getAllMyMessages:async (_parent,{sender},_context,_info)=>{
+        getAllMyMessages:async (_parent:any,{sender}:any,_context:any,_info:any)=>{
             try{
                 var o_id= new ObjectId.ObjectID(sender)
                 const messages=await Message.find({sender:"610920610807ec0f88e93d58"});
@@ -20,7 +21,7 @@ module.exports={
                 throw new Error(err);
             }
         },
-        getMyMessageAndOther:async (_parent,{sender,receiver},_context,_info)=>{
+        getMyMessageAndOther:async (_parent:any,{sender,receiver}:any,_context:any,_info:any)=>{
             try{
                 const messages=await Message.find({sender:sender,receiver:receiver}|| {sender:receiver,receiver:sender});
                 return messages;
@@ -28,7 +29,7 @@ module.exports={
                 throw new Error(err);
             }
         },
-        getMyMessageByArticle:async(parent,args,context,info)=>{
+        getMyMessageByArticle:async(parent:any,args:any,context:any,info:any)=>{
             const {sender,article}=args;
             try{
                 const messages=await Message.find({article:article,sender:sender}||{article:article,receiver:sender});
@@ -39,7 +40,7 @@ module.exports={
         }
     },
     Mutation:{
-        createMessage:async(_parent,args,_context,_info)=>{
+        createMessage:async(_parent:any,args:any,_context:any,_info:any)=>{
             const {sender,receiver,article,message}=args.message
             if(sender===receiver){
                 throw new UserInputError('sender would be different of receiver',{
@@ -62,7 +63,7 @@ module.exports={
             await newMessage.save();
             return newMessage;
         },
-        deleteMessage:async(parent,args,context,info)=>{
+        deleteMessage:async(parent:any,args:any,context:any,info:any)=>{
             const {id}=args;
             await Message.findByIdAndDelete(id);
             return 'Message Delete';

@@ -1,18 +1,18 @@
 const Article= require('../../models/article')
-const {UserInputError}=require('apollo-server')
+import {UserInputError} from 'apollo-server'
 module.exports ={
     Query:{
         getAllArticles: async ()=>{
             const article=await Article.find()
             return article
         },
-        getArticleById:async (_parent,{id},_context,_info)=>{
+        getArticleById:async (_parent:any,{id}:any,_context:any,_info:any)=>{
             return await Article.findById(id);
         }
     },
 
     Mutation:{
-        createArticle:async(parent,args,context,info)=>{
+        createArticle:async(parent:any,args:any,context:any,info:any)=>{
             const{titre,description,marque,etat,prix,ISBN,echange,matiere,image,color}=args.article;
             
             if(image.length>20){
@@ -47,7 +47,7 @@ module.exports ={
             return newArticle;
         },
 
-        updateArticle:async(parent,args,context,info)=>{
+        updateArticle:async(parent:any,args:any,context:any,info:any)=>{
             const {id}=args;
             const{titre,description,marque,etat,prix,ISBN,echange,matiere,image,color}=args.article;
             
@@ -84,7 +84,7 @@ module.exports ={
         },
 
 
-        deleteArticle:async(parent,args,context,info)=>{
+        deleteArticle:async(parent:any,args:any,context:any,info:any)=>{
             const {id}=args;
             await Article.findByIdAndDelete(id);
             return 'Article, Delete';

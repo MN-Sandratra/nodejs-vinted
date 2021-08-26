@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const color =require('../const/color.const');
 
 
-const articleSchema=({
+const articleSchema= new mongoose.Schema({
     titre:String,
     description:String,
     marque:String,
     etat:{
-        type:mongoose.Schema.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         refs:'etats'
     },
     prix:Number,

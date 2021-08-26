@@ -1,4 +1,4 @@
-const {gql}=require('apollo-server')
+import {gql} from 'apollo-server'
 
 const typeDefs=gql `
     type User{
@@ -6,6 +6,7 @@ const typeDefs=gql `
         username: String
         email: String
         password: String
+        location:String
         createdAt: String
     }
     type Etat{
@@ -80,6 +81,7 @@ const typeDefs=gql `
         username: String
         email: String
         password:String
+        location:String
     }
 
     input EtatInput{
@@ -128,6 +130,7 @@ const typeDefs=gql `
     
     type Mutation{
         createUser(user:UserInput):User
+        updateUser(id:ID,user:UserInput):User
         deleteUser(id:ID):String
         createEtat(etat:EtatInput):Etat
         deleteEtat(id:ID):String
