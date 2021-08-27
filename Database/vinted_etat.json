@@ -1,0 +1,3 @@
+{"_id":{"$oid":"612944d71fdd03315801827c"},"designation":"Neuf","description":"Sous carton ou venant d'une boutique ","__v":0}
+{"_id":{"$oid":"612944ff1fdd03315801827f"},"designation":"Bon etat","description":"Pas neuf mais encore utilisable","__v":0}
+{"_id":{"$oid":"612945241fdd033158018282"},"designation":"vieux","description":"article qui date et usee","__v":0}
