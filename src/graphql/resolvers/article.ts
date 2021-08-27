@@ -13,7 +13,7 @@ module.exports ={
 
     Mutation:{
         createArticle:async(parent:any,args:any,context:any,info:any)=>{
-            const{titre,description,marque,etat,prix,ISBN,echange,matiere,image,color}=args.article;
+            const{titre,description,marque,etat,prix,ISBN,echange,matiere,image}=args.article;
             
             if(image.length>20){
                 throw new UserInputError("Nombre d'Image superieur a 20",{
@@ -22,14 +22,6 @@ module.exports ={
                     }
                 });
             }
-            if(color.length>20){
-                throw new UserInputError("Nombre de couleur superieur a 2",{
-                    error:{
-                        username:"chaque article ne peut posseder plus de 2 couleurs"
-                    }
-                });
-            }
-
             const newArticle=new Article({
                 titre,
                 description,
@@ -37,7 +29,6 @@ module.exports ={
                 etat,
                 prix,
                 ISBN,
-                color,
                 echange,
                 matiere,
                 image,
@@ -49,19 +40,12 @@ module.exports ={
 
         updateArticle:async(parent:any,args:any,context:any,info:any)=>{
             const {id}=args;
-            const{titre,description,marque,etat,prix,ISBN,echange,matiere,image,color}=args.article;
+            const{titre,description,marque,etat,prix,ISBN,echange,matiere,image}=args.article;
             
             if(image.length>20){
                 throw new UserInputError("Nombre d'Image superieur a 20",{
                     error:{
                         username:"chaque article ne peut posseder plus de 20 images"
-                    }
-                });
-            }
-            if(color.length>20){
-                throw new UserInputError("Nombre de couleur superieur a 2",{
-                    error:{
-                        username:"chaque article ne peut posseder plus de 2 couleurs"
                     }
                 });
             }
@@ -74,7 +58,6 @@ module.exports ={
                 etat,
                 prix,
                 ISBN,
-                color,
                 echange,
                 matiere,
                 image},
