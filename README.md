@@ -4,8 +4,9 @@ Clone de la plateforme Vinted **[BACKEND]**
 Vinted Clone FrontEnd : [angular-vinted](https://github.com/MN-Sandratra/angular-vinted)
 
 
-To install application, clone this repository and run npm install from branch pre-prod. <br /> <br />
-Run MongoDB and execute : **npm run start:dev**
+To install application, clone this repository and run npm install from branch **pre-prod**. <br /> <br />
+Run MongoDB and import the json files from **"Database"** folder using [mongoimport](https://www.mongodb.com/try/download/database-tools?tck=docs_databasetools). <br /> <br />
+Execute : **npm run start:dev**
 
 # Membres
 
